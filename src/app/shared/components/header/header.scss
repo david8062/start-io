@@ -1,19 +1,149 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--background);
-  color: var(--foreground);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: var(--color-background);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 
-  nav a {
-    color: var(--primary);
-    font-weight: 600;
-    text-decoration: none;
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
 
-    &:hover {
-      text-decoration: underline;
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .logo-icon {
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-primary);
+      color: var(--color-on-primary);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--color-text);
+    }
+  }
+
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+
+    a {
+      color: var(--color-text);
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+.search {
+  flex: 1;
+  max-width: 400px;
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 0.5rem 0.75rem 0.5rem 2.5rem; // 👈 espacio para el ícono
+    border: 1px solid var(--color-border); // 👈 borde gris
+    border-radius: 0.375rem;
+    background: var(--color-input); // 👈 fondo gris
+    color: var(--color-text);
+    font-family: var(--font-sans);
+
+    &::placeholder {
+      color: var(--color-muted-foreground); // 👈 placeholder gris clarito
+    }
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.75rem; // como left-3 en Tailwind
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;   // w-4
+    height: 1rem;  // h-4
+    color: var(--color-muted-foreground);
+    pointer-events: none;
+  }
+}
+
+
+
+
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .icon-btn {
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      position: relative;
+
+      &:hover {
+        background: var(--color-hover);
+      }
+
+      ng-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      &.cart {
+        .badge {
+          position: absolute;
+          top: 0;
+          right: 0;
+          transform: translate(25%, -25%);
+          background: var(--color-accent);
+          color: var(--color-on-accent);
+          font-size: 0.7rem;
+          border-radius: 50%;
+          width: 1.25rem;
+          height: 1.25rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .mobile-only {
+      display: none;
+
+      @media (max-width: 768px) {
+        display: inline-flex;
+      }
     }
   }
 }

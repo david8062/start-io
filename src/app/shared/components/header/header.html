@@ -1,1 +1,49 @@
-<p>header works!</p>
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo -->
+      <div class="logo">
+
+        <span class="logo-text">Start Io</span>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="nav">
+        <a href="#productos">Productos</a>
+        <a href="#paquetes">Paquetes</a>
+        <a href="#soporte">Soporte</a>
+      </nav>
+
+      <!-- Search -->
+      <div class="search">
+  <ng-icon name="heroSearch" class="search-icon"></ng-icon>
+  <input id="search" name="search" type="text" placeholder="Buscar paquetes, servicios..." />
+</div>
+
+
+
+      <!-- Actions -->
+      <div class="actions">
+        <!-- Toggle de tema -->
+        <app-theme-toggle />
+
+        <!-- Botón usuario -->
+        <button class="icon-btn">
+          <ng-icon name="heroUser"></ng-icon>
+        </button>
+
+        <!-- Carrito -->
+        <button class="icon-btn cart">
+          <ng-icon name="heroShoppingCart"></ng-icon>
+          <span class="badge">3</span>
+        </button>
+
+        <!-- Menú móvil -->
+        <button class="icon-btn mobile-only">
+          <ng-icon name="heroBars3"></ng-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>

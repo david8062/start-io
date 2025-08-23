@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { ThemeToggleComponent } from '../theme-toggle/theme-toggle';
+import { heroStar, heroShoppingCart, heroBars3, heroUser } from '@ng-icons/heroicons/outline';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  standalone: true,
+  imports: [NgIconComponent, ThemeToggleComponent],
+  viewProviders: [provideIcons({ heroStar, heroShoppingCart, heroBars3, heroUser })],
   templateUrl: './header.html',
-  styleUrl: './header.scss'
+  styleUrls: ['./header.scss']
 })
-export class Header {
-
-}
+export class HeaderComponent {}
