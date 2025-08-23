@@ -1,59 +1,112 @@
-# StartIo
+#  Start-IO (Angular 24 + SSR)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+Este proyecto está construido con **Angular 24 (standalone components)** y soporta **Angular Universal (SSR)** para mejorar el SEO y el rendimiento en el renderizado inicial.  
+La arquitectura está diseñada para aplicaciones escalables y modulares.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📂 Estructura del Proyecto
 
-```bash
-ng serve
+```
+src/
+├── app
+│   ├── app.config.server.ts      # Configuración de Angular Universal
+│   ├── app.config.ts             # Configuración principal
+│   ├── app.html                  # Template base
+│   ├── app.routes.server.ts      # Rutas para SSR
+│   ├── app.routes.ts             # Rutas principales
+│   ├── app.scss                  # Estilos globales del app shell
+│   ├── app.spec.ts               # Test del componente raíz
+│   ├── app.ts                    # Componente raíz
+│   ├── core                      # Servicios y lógica global
+│   │   ├── guards/               # Guards para rutas
+│   │   ├── helpers/              # Funciones utilitarias
+│   │   ├── interceptors/         # Interceptores HTTP
+│   │   ├── pipes/                # Pipes globales
+│   │   └── services/             # Servicios globales
+│   ├── features                  # Módulos/funcionalidades principales
+│   │   └── home/                 # Ejemplo de feature (Home)
+│   │       └── components/       # Subcomponentes del feature
+│   └── shared                    # Recursos reutilizables
+│       ├── components/           # Componentes compartidos (botones, modales, etc.)
+│       └── shared.module.ts      # Módulo compartido (si aplica)
+├── assets
+│   ├── fonts/                    # Tipografías
+│   ├── images/                   # Imágenes
+│   └── json/                     # Archivos JSON estáticos
+├── index.html                    # Entrada principal
+├── main.ts                       # Bootstrap en navegador
+├── main.server.ts                # Bootstrap para SSR
+├── server.ts                     # Configuración de Angular Universal
+└── styles                        # Estilos globales SCSS (variables, mixins, base)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Scripts Disponibles
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Desarrollo**
+  ```bash
+  ng serve -o
+  ```
+  Corre la app en `http://localhost:4200`
 
-```bash
-ng generate component component-name
-```
+- **SSR (Angular Universal)**
+  ```bash
+  npm run dev:ssr
+  ```
+  Renderizado del lado del servidor en `http://localhost:4200`
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Build**
+  ```bash
+  ng build
+  ```
+  Genera la aplicación para producción en `dist/`
 
-```bash
-ng generate --help
-```
+- **Build SSR**
+  ```bash
+  npm run build:ssr
+  ```
 
-## Building
+- **Lint**
+  ```bash
+  ng lint
+  ```
 
-To build the project run:
+- **Test**
+  ```bash
+  ng test
+  ```
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Convenciones
 
-## Running unit tests
+- **Core**: lógica global y servicios singleton (guards, interceptors, helpers, pipes, directives).  
+- **Shared**: componentes y módulos reutilizables.  
+- **Features**: cada funcionalidad aislada, con sus componentes, rutas y servicios propios.  
+- **Assets**: estáticos como imágenes, fuentes o JSON.  
+- **Styles**: sistema de diseño SCSS (variables, mixins, helpers).  
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## Buenas Prácticas
 
-## Running end-to-end tests
+1. **Lazy Loading** en `features/` para mejorar performance.  
+2. Usar **standalone components** en lugar de módulos cuando sea posible.  
+3. Centralizar estilos SCSS en `styles/` (variables, mixins, base).  
+4. Evitar lógica de negocio en componentes → mover a servicios en `core/services`.  
+5. Reutilizar `pipes` y `directives` dentro de `shared/`.  
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## Stack
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Angular 24 (Standalone Components)
+- Angular Universal (SSR)
+- SCSS para estilos
+- Arquitectura modular (Core / Shared / Features)
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ Autor: **Jeffer Dev**

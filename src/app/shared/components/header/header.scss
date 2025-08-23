@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  nav a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

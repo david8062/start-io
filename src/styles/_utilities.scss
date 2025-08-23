@@ -1,0 +1,18 @@
+/* Backgrounds */
+.bg-background { background-color: var(--background); }
+.bg-primary { background-color: var(--primary); }
+.bg-secondary { background-color: var(--secondary); }
+.bg-accent { background-color: var(--accent); }
+
+/* Text colors */
+.text-foreground { color: var(--foreground); }
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-accent { color: var(--accent); }
+
+/* Radius */
+.rounded { border-radius: var(--radius); }
+
+/* Font utilities */
+.font-sans { font-family: var(--font-sans); }
+.font-heading { font-family: var(--font-heading); }
