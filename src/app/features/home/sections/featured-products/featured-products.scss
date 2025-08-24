@@ -1,0 +1,221 @@
+@use 'styles' as mixins;
+
+.featured-products {
+  padding: 4rem 0;
+  background-color: var(--background);
+  color: var(--foreground);
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* ===== Header ===== */
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-heading);
+    }
+
+    p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: color-mix(in oklch, var(--foreground) 60%, white);
+    }
+  }
+
+  /* ===== Grid ===== */
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  /* ===== Card ===== */
+  .card {
+    background: var(--background);
+    border: 1px solid color-mix(in oklch, var(--foreground) 15%, white);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-content {
+      padding: 1rem;
+
+      /* ===== Imagen ===== */
+      .image-wrapper {
+        position: relative;
+        margin-bottom: 1rem;
+
+        img {
+          width: 100%;
+          height: 190px;
+          object-fit: contain;
+          background-color: color-mix(in oklch, var(--background) 90%, var(--foreground));
+          border-radius: calc(var(--radius) - 2px);
+        }
+
+        /* Badge */
+        .badge {
+          position: absolute;
+          top: 8px;
+          left: 8px;
+          padding: 4px 10px;
+          border-radius: var(--radius);
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: white;
+
+          &.badge-secondary {
+            background-color: var(--secondary);
+          }
+
+          &.badge-danger {
+            background-color: oklch(0.55 0.25 20); // Rojo fuerte
+          }
+        }
+
+        /* Botón de vista previa */
+        .view-btn {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          background-color: white;
+          border: none;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+
+          &:hover {
+            background-color: color-mix(in oklch, white 90%, var(--primary));
+          }
+        }
+
+        &:hover .view-btn {
+          opacity: 1;
+        }
+      }
+
+      /* ===== Info ===== */
+      .info {
+        h3 {
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          font-family: var(--font-sans);
+          min-height: 40px;
+        }
+
+        /* Estrellas */
+        .rating {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          i {
+            font-size: 0.9rem;
+            color: #ddd;
+
+            &.filled {
+              color: oklch(0.8 0.2 90); // Amarillo cálido
+            }
+          }
+
+          span {
+            font-size: 0.85rem;
+            color: color-mix(in oklch, var(--foreground) 60%, white);
+          }
+        }
+
+        /* Precio */
+        .price {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-top: 0.5rem;
+
+          .current {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--foreground);
+          }
+
+          .original {
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            color: color-mix(in oklch, var(--foreground) 50%, white);
+          }
+        }
+
+        /* Features */
+        .features {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 6px;
+          margin-top: 0.5rem;
+
+          .feature {
+            background-color: color-mix(in oklch, var(--foreground) 8%, white);
+            padding: 4px 8px;
+            border-radius: var(--radius);
+            font-size: 0.75rem;
+            color: var(--foreground);
+          }
+        }
+      }
+    }
+
+    /* ===== Footer ===== */
+    .card-footer {
+      padding: 1rem;
+
+      .btn-primary {
+        @include mixins.button(var(--primary), var(--background));
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+      }
+    }
+  }
+
+  /* ===== Footer del Componente ===== */
+  .footer {
+    text-align: center;
+    margin-top: 2rem;
+
+    .btn-outline {
+      @include mixins.button(transparent, var(--primary));
+      border: 1px solid var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      &:hover {
+        background-color: var(--primary);
+        color: var(--background);
+      }
+    }
+  }
+}

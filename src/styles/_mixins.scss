@@ -4,9 +4,15 @@
   border-radius: var(--radius);
   padding: 0.5rem 1rem;
   font-weight: 600;
-  transition: background 0.2s ease;
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, filter 0.2s ease;
 
+  // Hover usando color-mix si el navegador lo soporta
   &:hover {
-    background-color: lighten($bg, 10%);
+    background-color: color-mix(in oklch, $bg 90%, white);
+    // Fallback si color-mix no está disponible
+    @supports not (background-color: color-mix(in oklch, $bg 90%, white)) {
+      filter: brightness(1.1);
+    }
   }
 }
