@@ -51,7 +51,7 @@ export class FeaturedProductsComponent {
       originalPrice: '$99.99',
       rating: 4.7,
       reviews: 156,
-      image: '/assets/images/placeholder-aim8n.png',
+      image: 'assets/images/not-product-default.png',
       badge: 'Oferta',
       features: ['Batería 30 días', 'Resistente al agua', 'App móvil'],
     },
@@ -71,5 +71,10 @@ Math: any;
 
   getStars(rating: number): number[] {
     return Array(5).fill(0).map((_, i) => i);
+  }
+
+   onImageError(event: Event) {
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/images/not-product-default.png';
   }
 }

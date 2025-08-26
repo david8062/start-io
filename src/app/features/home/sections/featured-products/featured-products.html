@@ -12,13 +12,14 @@
       <div class="card" *ngFor="let product of products">
         <div class="card-content">
           <div class="image-wrapper">
-            <img [src]="product.image" [alt]="product.name" />
+            <img [src]="product.image" [alt]="product.name" (error)="onImageError($event)" />
             <span class="badge" [ngClass]="{
-              'badge-danger': product.badge === 'Oferta',
-              'badge-secondary': product.badge !== 'Oferta'
-            }">
+  'badge-danger': product.badge === 'Oferta',
+  'badge-secondary': product.badge !== 'Oferta'
+}">
               {{ product.badge }}
             </span>
+
 
             <button class="icon-btn view-btn" title="Ver detalles">
               <i class="fas fa-eye"></i>
