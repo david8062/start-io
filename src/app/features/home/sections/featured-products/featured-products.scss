@@ -190,12 +190,35 @@
       padding: 1rem;
 
       .btn-primary {
-        @include mixins.button(var(--primary), var(--background));
-        width: 100%;
-        display: flex;
-        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 0.75rem;
+        display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.btn-primary {
+          background: var(--primary);
+          color: var(--primary-foreground);
+          border: none;
+
+          &:hover {
+            background: color-mix(in srgb, var(--primary) 90%, white);
+          }
+        }
+
+        &.btn-outline {
+          border: 2px solid var(--foreground);
+          background: transparent;
+          color: var(--foreground);
+
+          &:hover {
+            background: var(--foreground);
+            color: var(--background);
+          }
+        }
       }
     }
   }
