@@ -1,0 +1,64 @@
+<div class="cart-modal active" (click)="closeModal()">
+  <div class="cart-modal-content" (click)="$event.stopPropagation()">
+    <div class="cart-modal-header">
+      <h2 class="cart-modal-title">Tu Carrito de Compras</h2>
+      <button class="cart-modal-close" (click)="closeModal()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="cart-modal-items">
+      <ng-container *ngIf="items.length; else emptyCart">
+        <div class="cart-modal-item" *ngFor="let item of items">
+          <img [src]="item.image || 'assets/img/placeholder.png'" [alt]="item.name" />
+          <div class="cart-modal-item-info">
+            <div class="cart-modal-item-name">{{ item.name }}</div>
+            <div class="cart-modal-item-category">{{ item.category }}</div>
+            <div class="cart-modal-item-price">{{ item.price | currency }}</div>
+            <div class="cart-modal-item-quantity">
+              <button class="quantity-btn" (click)="decrement(item)">-</button>
+              <input type="text" class="quantity-input" [value]="item.quantity" readonly />
+              <button class="quantity-btn" (click)="increment(item)">+</button>
+            </div>
+          </div>
+          <button class="cart-modal-item-remove" (click)="removeItem(item)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-template #emptyCart>
+        <div class="empty-cart">
+          <i class="fas fa-shopping-cart"></i>
+          <p>Tu carrito está vacío</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="cart-modal-summary">
+      <div class="cart-modal-totals">
+        <div class="cart-modal-row">
+          <span>Subtotal</span>
+          <span>{{ subtotal | currency }}</span>
+        </div>
+        <div class="cart-modal-row">
+          <span>Envío</span>
+          <span>{{ shipping | currency }}</span>
+        </div>
+        <div class="cart-modal-row">
+          <span>Impuestos</span>
+          <span>{{ taxes | currency }}</span>
+        </div>
+        <div class="cart-modal-row cart-modal-total">
+          <span>Total</span>
+          <span>{{ total | currency }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-modal-actions">
+      <button class="btn btn-outline" (click)="closeModal()">Seguir Comprando</button>
+      <button class="btn btn-primary">Proceder al Pago</button>
+    </div>
+  </div>
+</div>

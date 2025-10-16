@@ -1,18 +1,24 @@
-@mixin button($bg, $color) {
-  background-color: $bg;
-  color: $color;
-  border-radius: var(--radius);
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  font-family: var(--font-sans);
-  transition: background-color 0.2s ease, filter 0.2s ease;
+@use './variables' as *;
 
-  // Hover usando color-mix si el navegador lo soporta
-  &:hover {
-    background-color: color-mix(in oklch, $bg 90%, white);
-    // Fallback si color-mix no está disponible
-    @supports not (background-color: color-mix(in oklch, $bg 90%, white)) {
-      filter: brightness(1.1);
-    }
-  }
+@mixin transition {
+  transition: $transition;
+}
+
+@mixin card {
+  background-color: var(--bg-card);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  border: 1px solid var(--border);
+  transition: $transition;
+}
+
+@mixin button($bg, $color: white) {
+  background: $bg;
+  color: $color;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
 }

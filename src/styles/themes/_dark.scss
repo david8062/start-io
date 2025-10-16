@@ -1,7 +1,25 @@
-[data-theme="dark"] {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.648 0.162 240);
-  --secondary: oklch(0.708 0.162 220);
-  --accent: oklch(0.608 0.162 260);
+@use 'variables' as v;
+
+body.dark-mode {
+  background-color: #111827;
+  color: #e5e7eb;
+
+  .navbar, .footer {
+    background-color: #1f2937;
+  }
+
+  .card {
+    background-color: #1f2937;
+    color: #f3f4f6;
+    box-shadow: none;
+  }
+
+  a {
+    color: v.$color-accent;
+  }
+
+  button {
+    background-color: v.$color-primary;
+    color: white;
+  }
 }

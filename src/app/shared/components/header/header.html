@@ -1,49 +1,71 @@
-<header class="header">
-  <div class="container">
-    <div class="header-content">
-      <!-- Logo -->
-      <div class="logo">
+<header>
+  <div class="container header-container">
+    <!-- LOGO -->
+    <div class="logo">
+      <i class="fas fa-map-marker-alt"></i> Start<span>Io</span>
+    </div>
 
-        <span class="logo-text">Start Io</span>
+    <!-- NAV -->
+    <nav [class.active]="menuOpen">
+      <ul>
+        <li><a routerLink="/inicio" (click)="closeMenu()">Inicio</a></li>
+        <li><a routerLink="/catalogo" (click)="closeMenu()">Catálogo</a></li>
+        <li><a routerLink="/servicios" (click)="closeMenu()">Servicios</a></li>
+        <li><a routerLink="/testimonios" (click)="closeMenu()">Testimonios</a></li>
+        <li><a routerLink="/contacto" (click)="closeMenu()">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- ACCIONES -->
+    <div class="header-actions">
+      <!-- BOTÓN TEMA -->
+      <button class="theme-toggle" (click)="toggleTheme()">
+        <i class="fa-solid" [ngClass]="themeService.isDarkTheme() ? 'fa-sun' : 'fa-moon'"></i>
+      </button>
+
+      <!-- CARRITO -->
+      <div class="cart-icon" (click)="toggleCartPreview($event)">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count">{{ cartCount }}</span>
+
+        <!-- PREVIEW DEL CARRITO -->
+        <div class="cart-preview" [ngClass]="{ active: cartOpen }" (click)="$event.stopPropagation()">
+          <ng-container *ngIf="cartItems.length; else emptyCart">
+            <div class="cart-items">
+              <div class="cart-item" *ngFor="let item of cartItems">
+                <img [src]="item.image || 'assets/img/placeholder.png'" alt="Producto" />
+                <div class="cart-item-info">
+                  <div class="cart-item-name">{{ item.name }}</div>
+                  <div class="cart-item-price">{{ item.price | currency }}</div>
+                </div>
+                <button class="cart-item-remove" (click)="removeItem(item)">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="cart-total">
+              <span>Total:</span>
+              <span>{{ total | currency }}</span>
+            </div>
+          </ng-container>
+
+          <ng-template #emptyCart>
+            <div class="empty-cart">
+              <p>Carrito vacío</p>
+              <p>Total: $0.00</p>
+            </div>
+          </ng-template>
+
+          <div class="cart-actions">
+            <button class="btn btn-outline" (click)="openCartModal($event)">Ver Carrito</button>
+            <button class="btn btn-primary">Comprar</button>
+          </div>
+        </div>
       </div>
-
-      <!-- Navigation -->
-      <nav class="nav">
-        <a href="#productos">Productos</a>
-        <a href="#paquetes">Paquetes</a>
-        <a href="#soporte">Soporte</a>
-      </nav>
-
-      <!-- Search -->
-      <div class="search">
-  <ng-icon name="heroSearch" class="search-icon"></ng-icon>
-  <input id="search" name="search" type="text" placeholder="Buscar paquetes, servicios..." />
-</div>
-
-
-
-      <!-- Actions -->
-      <div class="actions">
-        <!-- Toggle de tema -->
-        <app-theme-toggle />
-
-        <!-- Botón usuario -->
-        <button class="icon-btn">
-          <ng-icon name="heroUser"></ng-icon>
-        </button>
-
-        <!-- Carrito -->
-        <button class="icon-btn cart">
-          <ng-icon name="heroShoppingCart"></ng-icon>
-          <span class="badge">3</span>
-        </button>
-
-        <!-- Menú móvil -->
-        <button class="icon-btn mobile-only">
-          <ng-icon name="heroBars3"></ng-icon>
-        </button>
-      </div>
-
     </div>
   </div>
+
+  <!-- MODAL -->
+  <app-car-modal *ngIf="showModal" (close)="closeCartModal()"></app-car-modal>
 </header>

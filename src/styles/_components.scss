@@ -1,0 +1,37 @@
+@use './variables' as v;
+@use './mixins' as m;
+
+.button {
+  padding: 0.75rem 1.5rem;
+  border-radius: v.$border-radius;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background-color: v.$color-secondary;
+  @include m.transition(background-color);
+
+  &:hover {
+    background-color: v.$color-accent;
+  }
+
+  &--primary {
+    background-color: v.$color-primary;
+  }
+
+  &--danger {
+    background-color: v.$color-danger;
+  }
+}
+
+.card {
+  background-color: v.$color-bg;
+  border-radius: v.$border-radius;
+  padding: 1.5rem;
+  @include m.card-shadow;
+  @include m.transition(box-shadow);
+
+  &:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+}

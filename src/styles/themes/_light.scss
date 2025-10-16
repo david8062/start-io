@@ -1,0 +1,16 @@
+@use 'variables' as v;
+
+body {
+  background-color: v.$color-bg;
+  color: v.$color-text;
+}
+
+.navbar, .footer {
+  background-color: #ffffff;
+}
+
+.card {
+  background-color: #ffffff;
+  color: v.$color-text;
+  box-shadow: v.$shadow-card;
+}

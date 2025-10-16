@@ -1,0 +1,28 @@
+@use '../variables' as *;
+
+:root {
+  --primary: #{$primary};
+  --primary-dark: #{$primary-dark};
+  --primary-light: #{$primary-light};
+  --secondary: #{$secondary};
+  --accent: #{$accent};
+  --accent-light: #{$accent-light};
+
+  --bg: #{$bg-light};
+  --bg-card: #{$bg-card-light};
+  --text: #{$text-light};
+  --text-muted: #{$text-muted-light};
+  --border: #{$border-light};
+
+  --border-radius: #{$border-radius};
+  --box-shadow: #{$box-shadow};
+  --transition: #{$transition};
+}
+
+body.dark-theme {
+  --bg: #{$bg-dark};
+  --bg-card: #{$bg-card-dark};
+  --text: #{$text-dark};
+  --text-muted: #{$text-muted-dark};
+  --border: #{$border-dark};
+}

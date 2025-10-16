@@ -1,0 +1,42 @@
+@use './variables' as v;
+@use './mixins' as m;
+
+header {
+  background-color: v.$color-primary;
+  color: white;
+  padding: 1rem 0;
+
+  nav {
+    @include m.flex-center(row);
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+
+    li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      @include m.transition(color);
+      
+      &:hover {
+        color: v.$color-accent;
+      }
+    }
+  }
+}
+
+footer {
+  background-color: v.$color-primary;
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
