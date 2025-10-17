@@ -1,0 +1,86 @@
+<section class="catalog" id="catalogo">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestros Dispositivos GPS</h2>
+      <p>Encuentra el equipo perfecto para tus necesidades de rastreo</p>
+    </div>
+
+    <div class="catalog-header">
+      <h3>Filtrar Productos</h3>
+      <div><span>{{ filteredProducts.length }} productos</span></div>
+    </div>
+
+    <div class="catalog-filters">
+      <div class="filter-group">
+        <label for="categoryFilter">Categoría</label>
+        <select id="categoryFilter" class="filter-select" [(ngModel)]="categoryFilter" (change)="filterProducts()">
+          <option value="all">Todas las categorías</option>
+          <option value="vehicular">GPS Vehicular</option>
+          <option value="personal">Tracker Personal</option>
+          <option value="flota">GPS para Flotas</option>
+          <option value="mascotas">GPS para Mascotas</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="priceFilter">Precio</label>
+        <select id="priceFilter" class="filter-select" [(ngModel)]="priceFilter" (change)="filterProducts()">
+          <option value="all">Todos los precios</option>
+          <option value="0-50">Menos de $50</option>
+          <option value="50-100">$50 - $100</option>
+          <option value="100-150">$100 - $150</option>
+          <option value="150+">Más de $150</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="ratingFilter">Calificación</label>
+        <select id="ratingFilter" class="filter-select" [(ngModel)]="ratingFilter" (change)="filterProducts()">
+          <option value="all">Todas las calificaciones</option>
+          <option value="5">5 estrellas</option>
+          <option value="4">4+ estrellas</option>
+          <option value="3">3+ estrellas</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Rango de precios personalizado</label>
+        <div class="price-range">
+          <input type="number" [(ngModel)]="minPrice" (input)="filterProducts()" class="price-input" placeholder="Mín" min="0">
+          <span>-</span>
+          <input type="number" [(ngModel)]="maxPrice" (input)="filterProducts()" class="price-input" placeholder="Máx" min="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="catalog-grid">
+      <div class="product-card" *ngFor="let product of filteredProducts">
+        <div class="product-image">
+          <i class="fas fa-{{ getProductIcon(product.category) }}"></i>
+          <span *ngIf="product.badge" class="product-badge">{{ product.badge }}</span>
+        </div>
+
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+
+          <div class="product-meta">
+            <div class="product-rating">
+              <i *ngFor="let _ of renderStars(product.rating).full" class="fas fa-star"></i>
+              <i *ngIf="renderStars(product.rating).half" class="fas fa-star-half-alt"></i>
+              <i *ngFor="let _ of renderStars(product.rating).empty" class="far fa-star"></i>
+            </div>
+            <span class="product-category">{{ getCategoryName(product.category) }}</span>
+          </div>
+
+          <span class="price">\${{ product.price.toFixed(2) }}</span>
+
+          <div class="product-actions">
+            <button class="btn btn-outline" (click)="viewProductDetails(product)">Ver Detalles</button>
+            <button class="btn btn-primary" (click)="addToCart(product)">Añadir al Carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

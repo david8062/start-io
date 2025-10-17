@@ -1,0 +1,250 @@
+<section class="checkout" *ngIf="currentStep < 4">
+  <div class="container">
+    <h1>Finalizar Compra</h1>
+    <p>Completa tu información para procesar el pedido</p>
+
+    <!-- Pasos del Checkout -->
+    <div class="checkout-steps">
+      <div class="step" [class.active]="currentStep === 1">
+        <div class="step-icon"><i class="fas fa-user"></i></div>
+        <span class="step-label">Información</span>
+      </div>
+      <div class="step" [class.active]="currentStep === 2">
+        <div class="step-icon"><i class="fas fa-truck"></i></div>
+        <span class="step-label">Envío</span>
+      </div>
+      <div class="step" [class.active]="currentStep === 3">
+        <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+        <span class="step-label">Pago</span>
+      </div>
+      <div class="step" [class.active]="currentStep === 4">
+        <div class="step-icon"><i class="fas fa-check"></i></div>
+        <span class="step-label">Confirmación</span>
+      </div>
+    </div>
+
+    <div class="checkout-container">
+      <!-- Paso 1: Información Personal -->
+      <div class="checkout-form" *ngIf="currentStep === 1">
+        <h2>Información Personal</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="firstName">Nombre</label>
+            <input type="text" id="firstName" class="form-input" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Apellido</label>
+            <input type="text" id="lastName" class="form-input" placeholder="Tu apellido" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">Correo Electrónico</label>
+          <input type="email" id="email" class="form-input" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">Teléfono</label>
+          <input type="tel" id="phone" class="form-input" placeholder="+1 (555) 123-4567" required>
+        </div>
+        <button class="btn btn-primary" (click)="nextStep(2)">Continuar al Envío</button>
+      </div>
+
+      <!-- Paso 2: Envío -->
+      <div class="checkout-form" *ngIf="currentStep === 2">
+        <h2>Información de Envío</h2>
+        <div class="form-group">
+          <label class="form-label" for="address">Dirección</label>
+          <input type="text" id="address" class="form-input" placeholder="Calle y número" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="city">Ciudad</label>
+            <input type="text" id="city" class="form-input" placeholder="Ciudad" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="state">Estado/Provincia</label>
+            <input type="text" id="state" class="form-input" placeholder="Estado" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="zipCode">Código Postal</label>
+            <input type="text" id="zipCode" class="form-input" placeholder="Código postal" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="country">País</label>
+            <select id="country" class="form-select" required>
+              <option value="">Seleccionar país</option>
+              <option value="MX">México</option>
+              <option value="US">Estados Unidos</option>
+              <option value="ES">España</option>
+              <option value="AR">Argentina</option>
+              <option value="CO">Colombia</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Método de Envío</label>
+          <div class="form-row">
+            <div class="form-group">
+              <div class="payment-method">
+                <div class="payment-icon"><i class="fas fa-truck"></i></div>
+                <div>Estándar</div>
+                <div class="order-item-price">$9.99</div>
+                <small>5-7 días hábiles</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="payment-method">
+                <div class="payment-icon"><i class="fas fa-shipping-fast"></i></div>
+                <div>Express</div>
+                <div class="order-item-price">$19.99</div>
+                <small>2-3 días hábiles</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="shippingNotes">Instrucciones de entrega (opcional)</label>
+          <textarea id="shippingNotes" class="form-input" rows="3"
+            placeholder="Instrucciones especiales para la entrega"></textarea>
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn btn-outline" (click)="prevStep(1)">Atrás</button>
+          <button class="btn btn-primary" (click)="nextStep(3)">Continuar al Pago</button>
+        </div>
+      </div>
+
+      <!-- Paso 3: Pago -->
+      <div class="checkout-form" *ngIf="currentStep === 3">
+        <h2>Información de Pago</h2>
+
+        <div class="form-group">
+          <label class="form-label">Método de Pago</label>
+          <div class="payment-methods">
+            <div class="payment-method">
+              <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
+              <div>Tarjeta de Crédito</div>
+            </div>
+            <div class="payment-method">
+              <div class="payment-icon"><i class="fas fa-credit-card"></i></div>
+              <div>Tarjeta de Débito</div>
+            </div>
+            <div class="payment-method">
+              <div class="payment-icon"><i class="fab fa-paypal"></i></div>
+              <div>PayPal</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="creditCardForm">
+          <div class="form-group">
+            <label class="form-label" for="cardNumber">Número de Tarjeta</label>
+            <input type="text" id="cardNumber" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="expiryDate">Fecha de Vencimiento</label>
+              <input type="text" id="expiryDate" class="form-input" placeholder="MM/AA" maxlength="5">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cvv">CVV</label>
+              <input type="text" id="cvv" class="form-input" placeholder="123" maxlength="3">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cardName">Nombre en la Tarjeta</label>
+            <input type="text" id="cardName" class="form-input" placeholder="Como aparece en la tarjeta">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <input type="checkbox" id="saveCard" style="margin-right: 0.5rem;">
+            Guardar información de tarjeta para futuras compras
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <input type="checkbox" id="terms" style="margin-right: 0.5rem;" required>
+            Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a>
+          </label>
+        </div>
+
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn btn-outline" (click)="prevStep(2)">Atrás</button>
+          <button class="btn btn-accent" (click)="processPayment()">Completar Pedido</button>
+        </div>
+      </div>
+
+      <!-- Resumen del Pedido -->
+      <div class="order-summary">
+        <h3>Resumen del Pedido</h3>
+        <div class="order-items">
+          <div class="order-item">
+            <img
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><rect width='60' height='60' fill='%233b82f6'/><circle cx='30' cy='30' r='20' fill='%2306b6d4'/><text x='30' y='35' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>GPS</text></svg>"
+              alt="GPS Vehicular">
+            <div class="order-item-info">
+              <div class="order-item-name">GPS Vehicular TK-900</div>
+              <div class="order-item-quantity">Cantidad: 1</div>
+            </div>
+            <div class="order-item-price">$89.99</div>
+          </div>
+          <div class="order-item">
+            <img
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><rect width='60' height='60' fill='%230ea5e9'/><circle cx='30' cy='30' r='20' fill='%2322d3ee'/><text x='30' y='35' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>Tracker</text></svg>"
+              alt="Tracker Personal">
+            <div class="order-item-info">
+              <div class="order-item-name">Tracker Personal PT-40</div>
+              <div class="order-item-quantity">Cantidad: 2</div>
+            </div>
+            <div class="order-item-price">$139.98</div>
+          </div>
+        </div>
+        <div class="order-totals">
+          <div class="order-row"><span>Subtotal</span><span>$229.97</span></div>
+          <div class="order-row"><span>Envío</span><span>$9.99</span></div>
+          <div class="order-row"><span>Impuestos</span><span>$27.60</span></div>
+          <div class="order-row order-total"><span>Total</span><span>$267.56</span></div>
+        </div>
+        <div class="security-badges">
+          <div class="security-badge"><i class="fas fa-lock"></i><span>Pago Seguro</span></div>
+          <div class="security-badge"><i class="fas fa-shield-alt"></i><span>SSL</span></div>
+          <div class="security-badge"><i class="fas fa-award"></i><span>Garantía</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Confirmación -->
+<section class="confirmation" *ngIf="currentStep === 4">
+  <div class="container">
+    <div class="confirmation-icon"><i class="fas fa-check-circle"></i></div>
+    <h1>¡Pedido Confirmado!</h1>
+    <p>Gracias por tu compra. Hemos enviado un correo de confirmación a <strong>tu@email.com</strong></p>
+
+    <div class="tracking-info">
+      <h3 style="color: white;">Tu pedido está siendo procesado</h3>
+      <p style="color: rgba(255,255,255,0.9);">Número de seguimiento:</p>
+      <div class="tracking-number">TRK-7842-6159</div>
+      <p style="color: rgba(255,255,255,0.9);">Fecha estimada de entrega: <strong>15 de Noviembre, 2023</strong></p>
+    </div>
+
+    <div class="order-details">
+      <h3>Resumen del Pedido</h3>
+      <div class="order-details-row"><span>Número de Pedido:</span><span>#TS-2023-7842</span></div>
+      <div class="order-details-row"><span>Fecha:</span><span>8 de Noviembre, 2023</span></div>
+      <div class="order-details-row"><span>Total:</span><span>$267.56</span></div>
+      <div class="order-details-row"><span>Método de Pago:</span><span>Tarjeta de Crédito **** 3456</span></div>
+      <div class="order-details-row"><span>Dirección de Envío:</span><span>Calle Principal 123, Ciudad, Estado 12345</span></div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a routerLink="/products" class="btn btn-outline">Seguir Comprando</a>
+      <a href="#" class="btn btn-primary">Ver Detalles del Pedido</a>
+      <a href="#" class="btn btn-accent">Rastrear Pedido</a>
+    </div>
+  </div>
+</section>
